@@ -128,10 +128,12 @@ window.addEventListener('click', (e) => {
             }else if( resultText.textContent.includes('Computer') ){
                 compScore += 1;
             }
-    
-            document.querySelector('.player.scr span').textContent = pScore;
-            document.querySelector('.computer.scr span').textContent = compScore;
 
+            setTimeout(() => {
+                document.querySelector('.player.scr span').textContent = pScore;
+                document.querySelector('.computer.scr span').textContent = compScore;
+            }, 500)
+    
         }, 2500)
 
     }
