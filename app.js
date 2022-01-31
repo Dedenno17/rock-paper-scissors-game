@@ -105,12 +105,20 @@ window.addEventListener('click', (e) => {
     if( e.target.className === 'rock' || e.target.className === 'paper' || e.target.className === 'scissors' ){
         const player = e.target.className;
         const comp = compChoice();
+        const resultText = document.querySelector('h1');
 
         document.querySelector('.image.player').src = `./img/${player}.png`;
         document.querySelector('.image.comp').src = `./img/${comp}.png`;
-        document.querySelector('h1').textContent = rules(player, comp);
-    
-        console.log(player);
+        resultText.textContent = rules(player, comp);
+
+        if( resultText.textContent.includes('Player') ){
+            pScore += 1;
+        }else if( resultText.textContent.includes('Computer') ){
+            compScore += 1;
+        }
+
+        document.querySelector('.player.scr span').textContent = pScore;
+        document.querySelector('.computer.scr span').textContent = compScore;
     }
 })
 
