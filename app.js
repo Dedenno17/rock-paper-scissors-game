@@ -16,9 +16,9 @@ function makeElMain() {
     return `<div class="main-container">
                 <h1>Choose an Option</h1>
                 <div class="btn-container">
-                    <button class="btn rock">Rock</button>
-                    <button class="btn paper">Paper</button>
-                    <button class="btn scissors">Scissors</button>
+                    <button class="rock">Rock</button>
+                    <button class="paper">Paper</button>
+                    <button class="scissors">Scissors</button>
                 </div>
                 <div class="img-container">
                     <img src="./img/rock.png" alt="player choose" class="image player">
@@ -31,11 +31,53 @@ function makeElMain() {
             </div>`;
 }
 
+// fungsi pilihan comp
+function compChoice() {
+    const ranNum = Math.round(Math.random() * (9 - 1) + 1);
 
+    if( ranNum >= 1 && ranNum <= 3){
+        return 'rock';
+    }else if( ranNum >= 4 && ranNum <= 6 ){
+        return 'paper';
+    }else if( ranNum >= 7 && ranNum <= 9 ){
+        return 'scissors';
+    }
+}
+
+
+// rules
+function rules(player, comp){
+    if( player === comp ){
+        return `It's DRAW!!`;
+    }else{
+        if( player === 'rock' ){
+            if( comp === 'paper' ){
+                return `Computer WIN!!`;
+            }else if( comp === 'scissors' ){
+                return `Player WIN!!`;
+            }
+        }else if( player === 'paper' ){
+            if( comp === 'rock' ){
+                return `Player WIN!!`; 
+            }else if( comp === 'scissors' ){
+                return `Computer WIN!!`;
+            }
+        }else if( player === 'scissors' ){
+            if( comp === 'rock' ){
+                return `Computer WIN!!`;
+            }else if( comp === 'paper' ){
+                return `Player WIN!!`; 
+            }
+        }
+    }
+}
 
 
 // Event Handler
+
 const body = document.querySelector('body');
+let pScore = 0;
+let compScore = 0;
 
 // meload game pertama kali
 window.addEventListener('load', function() {
@@ -45,6 +87,7 @@ window.addEventListener('load', function() {
 // memulai game
 window.addEventListener('click', (e) => {
     if( e.target.className == 'playGameBtn' ){
+
         // menyembunyikan opening
         e.target.parentElement.classList.add('hide');
 
@@ -56,5 +99,19 @@ window.addEventListener('click', (e) => {
         
     }
 });
+
+// pilian player
+window.addEventListener('click', (e) => {
+    if( e.target.className === 'rock' || e.target.className === 'paper' || e.target.className === 'scissors' ){
+        const player = e.target.className;
+        const comp = compChoice();
+
+        document.querySelector('.image.player').src = `./img/${player}.png`;
+        document.querySelector('.image.comp').src = `./img/${comp}.png`;
+        document.querySelector('h1').textContent = rules(player, comp);
+    
+        console.log(player);
+    }
+})
 
 
