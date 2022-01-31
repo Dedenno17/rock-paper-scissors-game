@@ -21,8 +21,8 @@ function makeElMain() {
                     <button class="scissors">Scissors</button>
                 </div>
                 <div class="img-container">
-                    <img src="./img/rock.png" alt="player choose" class="image player">
-                    <img src="./img/rock.png" alt="computer choose" class="image comp">
+                    <img src="./img/player-rock.png" alt="player choose" class="image player">
+                    <img src="./img/comp-rock.png" alt="computer choose" class="image comp">
                 </div>
                 <div class="score">
                     <div class="player scr"><h2>Player</h2><span>0</span></div>
@@ -106,19 +106,34 @@ window.addEventListener('click', (e) => {
         const player = e.target.className;
         const comp = compChoice();
         const resultText = document.querySelector('h1');
+        const images = Array.from(document.querySelectorAll('.image'));
 
-        document.querySelector('.image.player').src = `./img/${player}.png`;
-        document.querySelector('.image.comp').src = `./img/${comp}.png`;
-        resultText.textContent = rules(player, comp);
+        // mereset icon paper menjadi rock
+        document.querySelector('.image.player').src = `./img/player-rock.png`;
+        document.querySelector('.image.comp').src = `./img/comp-rock.png`;
 
-        if( resultText.textContent.includes('Player') ){
-            pScore += 1;
-        }else if( resultText.textContent.includes('Computer') ){
-            compScore += 1;
-        }
+        // memberi image animasi ancang - ancang
+        images.forEach(el => el.classList.add('show'));
 
-        document.querySelector('.player.scr span').textContent = pScore;
-        document.querySelector('.computer.scr span').textContent = compScore;
+        // menghentikan animasi & menampilkan hasil
+        setTimeout(() => {
+            images.forEach(el => el.classList.remove('show'));
+
+            document.querySelector('.image.player').src = `./img/player-${player}.png`;
+            document.querySelector('.image.comp').src = `./img/comp-${comp}.png`;
+            resultText.textContent = rules(player, comp);
+    
+            if( resultText.textContent.includes('Player') ){
+                pScore += 1;
+            }else if( resultText.textContent.includes('Computer') ){
+                compScore += 1;
+            }
+    
+            document.querySelector('.player.scr span').textContent = pScore;
+            document.querySelector('.computer.scr span').textContent = compScore;
+
+        }, 2500)
+
     }
 })
 

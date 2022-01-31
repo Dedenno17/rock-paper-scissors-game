@@ -1,11 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;800&family=Readex+Pro:wght@200;600&family=Roboto:wght@100;500;700&family=Ubuntu:wght@300;500;700&family=Varela+Round&display=swap');
 
+@keyframes animasi {
+    0%{
+    transform: translateX(0) ; 
+    }100%{
+        transform: translateY(-50px);
+    }
+}
+
 /* awalan style */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Readex Pro', sans-serif;
+    /* border: 1px solid salmon; */
 }
 
 html, body{
@@ -102,15 +111,16 @@ h1{
     display: flex;
     justify-content: space-evenly;
     height: 40%;
+    width: 100%;
 }
 .img-container .image{
-    width: 17%
+    width: 17%;
 }
-.image.comp{
-    transform: rotate(-60deg);
+.image.player.show{
+   animation : animasi .5s ease infinite alternate;
 }
-.image.player{
-    transform: rotate(45deg);
+.image.comp.show{
+   animation: animasi .5s ease infinite alternate;
 }
 .score{
     position: absolute;
