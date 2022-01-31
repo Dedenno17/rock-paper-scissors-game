@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;800&family=Readex+Pro:wght@200;600&family=Roboto:wght@100;500;700&family=Ubuntu:wght@300;500;700&family=Varela+Round&display=swap');
+
+/* awalan style */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Readex Pro', sans-serif;
+}
+
+body{
+    font-size: 16 px;
+}
+/* awalan style */
+
+
+
+/* opening container */
+.opening-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background: radial-gradient(#080e67, #060a47);
+    opacity: 1;
+    visibility: visible;
+}
+h1{
+    font-size: 3.5rem;
+    color: #ddd;
+}
+.playGameBtn{
+    padding: 15px 50px;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #ddd;
+    font-weight: bold;
+    background-color: #6366b9;
+}
+.playGameBtn:active{
+    transform: scale(.98);
+}
+
