@@ -4,7 +4,7 @@ function makeElOp() {
                     <h1>Rock Paper & Scissors</h1>
                     <img src="./img/openingImg.png" alt="rock paper scissors image">
                     <button class="playGameBtn">PLAY GAME</button>
-                    <audio src=""></audio>
+                    <audio src="./sound/count.wav"></audio>
                 </div>`;
 };
 
@@ -28,6 +28,8 @@ function makeElMain() {
                     <div class="player scr"><h2>Player</h2><span>0</span></div>
                     <div class="computer scr"><h2>Comp</h2><span>0</span></div>
                 </div>
+                <audio src="./sound/drumRoll.mp3"></audio>
+                <audio src="./sound/ta-da.wav"></audio>
             </div>`;
 }
 
@@ -87,6 +89,10 @@ window.addEventListener('load', function() {
 // memulai game
 window.addEventListener('click', (e) => {
     if( e.target.className == 'playGameBtn' ){
+        
+        // mengaluarkan suara ketika tombol di klik
+        const sound = document.querySelector('audio');
+        sound.play();
 
         // menyembunyikan opening
         e.target.parentElement.classList.add('hide');
@@ -107,10 +113,15 @@ window.addEventListener('click', (e) => {
         const comp = compChoice();
         const resultText = document.querySelector('h1');
         const images = Array.from(document.querySelectorAll('.image'));
+        const sound = document.querySelectorAll('audio');
 
         // mereset icon paper menjadi rock
         document.querySelector('.image.player').src = `./img/player-rock.png`;
         document.querySelector('.image.comp').src = `./img/comp-rock.png`;
+
+        // memberi suara ancang - ancang
+        sound[0].load();
+        sound[0].play();
 
         // memberi image animasi ancang - ancang
         images.forEach(el => el.classList.add('show'));
@@ -118,17 +129,19 @@ window.addEventListener('click', (e) => {
         // menghentikan animasi & menampilkan hasil
         setTimeout(() => {
             images.forEach(el => el.classList.remove('show'));
-
+            sound[0].pause();
+            sound[1].play();
+            
             document.querySelector('.image.player').src = `./img/player-${player}.png`;
             document.querySelector('.image.comp').src = `./img/comp-${comp}.png`;
             resultText.textContent = rules(player, comp);
-    
+            
             if( resultText.textContent.includes('Player') ){
                 pScore += 1;
             }else if( resultText.textContent.includes('Computer') ){
                 compScore += 1;
             }
-
+            
             setTimeout(() => {
                 document.querySelector('.player.scr span').textContent = pScore;
                 document.querySelector('.computer.scr span').textContent = compScore;
